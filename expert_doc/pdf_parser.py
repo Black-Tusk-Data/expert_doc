@@ -11,6 +11,7 @@ from expert_doc.models import (
     PagedDocParser,
 )
 
+
 class ImageWrapper(Image):
     def __init__(self, raw_img: PdfImage):
         self.raw_img = raw_img
@@ -22,7 +23,6 @@ class ImageWrapper(Image):
     pass
 
 
-
 class PdfParser(PagedDocParser):
     def __init__(self, path: Path):
         super(PdfParser, self).__init__(path)
@@ -30,11 +30,11 @@ class PdfParser(PagedDocParser):
         self.text_pdf = pdfium.PdfDocument(str(path))
         assert len(self.img_pdf.pages) == len(self.text_pdf)
         return
-    
+
     def iter_pages(self) -> Iterable[ParsedPage]:
         for text_page, img_page in zip(
-                self.text_pdf,
-                self.img_pdf.pages,
+            self.text_pdf,
+            self.img_pdf.pages,
         ):
             yield ParsedPage(
                 images=[
@@ -45,4 +45,5 @@ class PdfParser(PagedDocParser):
             )
             pass
         return
+
     pass

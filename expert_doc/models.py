@@ -4,6 +4,7 @@ from typing import Iterable, NamedTuple
 
 
 class Image(abc.ABC):
+    @abc.abstractmethod
     def dump_to_file(self, name_no_extension: str) -> str:
         pass
 
@@ -17,15 +18,12 @@ class ParsedPage(NamedTuple):
 
 
 class PagedDocParser(abc.ABC):
-    def __init__(
-            self,
-            path: Path
-    ):
+    def __init__(self, path: Path):
         self.path = path
         return
 
     @abc.abstractmethod
     def iter_pages(self) -> Iterable[ParsedPage]:
         pass
-    
+
     pass
